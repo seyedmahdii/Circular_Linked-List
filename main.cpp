@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include<iostream>
 using namespace std;
 
 class node{
@@ -7,10 +7,24 @@ class node{
         node* next;
         node* prev;
     public:
-        //add getter and setter functions here
-        /*
-            here
-        */
+        int getData(){
+            return data;
+        }
+        void setData(int data){
+            this->data = data;
+        }
+        node * getNext(){
+            return next;
+        }
+        void setNext(node * next){
+            this->next = next;
+        }
+        node * getPrev(){
+            return prev;
+        }
+        void setPrev(node * prev){
+            this->prev = prev;
+        }
 };
 class Circular_linked_list{
     private:
@@ -19,11 +33,11 @@ class Circular_linked_list{
     public:
         Circular_linked_list();
         ~Circular_linked_list();
-        //add getter and setter functions here
-        /*
 
-            here
-        */
+        int getSize(){
+            return size;
+        }
+
         void push();
         void pop();
         void pop(int data);
@@ -38,6 +52,5 @@ class Circular_linked_list{
 
 int main(){
 
-    cout << "wasssa" ;
 
 }
