@@ -38,6 +38,6 @@ class Circular_linked_list{
 
 int main(){
 
-
+    cout << "wasssa" ;
 
 }
