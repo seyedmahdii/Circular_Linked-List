@@ -38,11 +38,14 @@ class Circular_linked_list{
             return size;
         }
 
-        void push();
+        void push(int data){
+
+        }
+
         void pop();
         void pop(int data);
-        void push_after(int data);
-        void push_befor(int data);
+        void push_after(int new_data,int pa_data);
+        void push_befor(int new_data,int pb_data);
         void print();
 
 
