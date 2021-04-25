@@ -39,14 +39,51 @@ class Circular_linked_list{
         }
 
         void push(int data){
+            node * new_node = new node;
 
+            // first node
+            if(current == nullptr){
+                new_node->setData(data);
+                new_node->setNext(new_node);
+                new_node->setPrev(new_node);
+                current = new_node;
+                size++;
+                return;
+            }
+
+            // select last node
+            node * last = current->getPrev();
+
+            new_node->setData(data);
+            new_node->setNext(current);
+            new_node->setPrev(last);
+
+            last->setNext(new_node);
+            current->setPrev(new_node);
+
+            current = new_node;
+            size++;
         }
 
         void pop();
         void pop(int data);
         void push_after(int new_data,int pa_data);
         void push_befor(int new_data,int pb_data);
-        void print();
+
+        void print(){
+            if(current == nullptr){
+                cout << "List is empty" << endl;
+                return;
+            }
+
+            node * temp = current;
+            do{
+                cout << temp->getData() << "\t";
+                temp = temp->getNext();
+            }
+            while (temp != current);
+            cout << endl;
+        }
 
 
 };
@@ -54,6 +91,11 @@ class Circular_linked_list{
 
 
 int main(){
+    Circular_linked_list list;
+    list.push(12);
+    list.push(22);
+    list.push(32);
+    list.print();
 
-
+    return 0;
 }
