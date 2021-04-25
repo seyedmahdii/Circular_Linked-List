@@ -106,8 +106,6 @@ class Circular_linked_list{
 
 };
 
-
-
 int main(){
     Circular_linked_list list;
     list.push(12);
