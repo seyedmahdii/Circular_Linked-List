@@ -83,7 +83,34 @@ class Circular_linked_list{
             size++;
         }
 
-        void pop();
+      void pop(){
+            // empty list
+            if(current == nullptr){
+                return;
+            }
+
+            // one node left
+            if(size == 1){
+                delete current;
+                current = nullptr;
+                size--;
+                return;
+            }
+
+            // select the last node
+            node * last = current;
+            while(last->getNext() != current){
+                last = last->getNext();
+            }
+
+            node * first = current;
+            current = current->getNext();
+            current->setPrev(last);
+            delete first;
+            first = nullptr;
+            last->setNext(current);
+            size--;
+        }
         void pop(int data);
         void push_after(int new_data,int pa_data);
         void push_befor(int new_data,int pb_data);
