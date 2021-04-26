@@ -111,8 +111,76 @@ class Circular_linked_list{
             last->setNext(current);
             size--;
         }
-        void pop(int data);
-        void push_after(int new_data,int pa_data);
+
+        void pop(int data){
+            // empty list
+            if(current == nullptr){
+                return;
+            }
+
+            node * toBeRemoved = current, * prevNode = nullptr;
+            while(toBeRemoved->getData() != data){
+                if(toBeRemoved->getNext() == current){
+                    cout << data << " is not in the list!" << endl;
+                    return;
+                }
+                prevNode = toBeRemoved;
+                toBeRemoved = toBeRemoved->getNext();
+            }
+
+            // Check if node is the only node in list
+            if (toBeRemoved->getNext() == current && prevNode == nullptr){ // size == 1
+                delete toBeRemoved;
+                size = 0;
+                current = nullptr;
+                return;
+            }
+
+            // deleting first node
+            if(toBeRemoved == current){
+                this->pop();
+                return;
+            }
+
+            // deleting last node
+            if(toBeRemoved->getNext() == current){ // current->getPrev() == toBeRemoved
+                prevNode->setNext(current);
+                current->setPrev(prevNode);
+                delete toBeRemoved;
+                size--;
+                return;
+            }
+
+            // deleting a middle node
+            node * nextNode = toBeRemoved->getNext();
+            prevNode->setNext(nextNode);
+            nextNode->setPrev(prevNode);
+            delete toBeRemoved;
+            size--;
+        }
+
+        void push_after(int new_data,int pa_data){
+            node * new_node = new node();
+            new_node->setData(new_data);
+
+            node * temp = current;
+            while(temp->getData() != pa_data){
+                // the case where pa_data does not exist
+                if(temp->getNext() == current){
+                    cout << pa_data << " is not in the list to push after it!" << endl;
+                    return;
+                }
+
+                temp = temp->getNext();
+            }
+            node * nextNode = temp->getNext();
+            temp->setNext(new_node);
+            new_node->setPrev(temp);
+            new_node->setNext(nextNode);
+            nextNode->setPrev(new_node);
+            size++;
+        }
+
         void push_befor(int new_data,int pb_data);
 
         void print(){
@@ -129,16 +197,23 @@ class Circular_linked_list{
             while (temp != current);
             cout << endl;
         }
-
-
 };
 
 int main(){
     Circular_linked_list list;
     list.push(12);
     list.push(22);
+    list.pop(12);
     list.push(32);
     list.print();
+
+    list.push_after(85, 22);
+    list.print();
+
+    list.pop();
+    list.print();
+
+    cout << "Size of list : " << list.getSize() << endl;
 
     return 0;
 }
