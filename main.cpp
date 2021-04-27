@@ -181,7 +181,34 @@ class Circular_linked_list{
             size++;
         }
 
-        void push_befor(int new_data,int pb_data);
+        void push_before(int new_data,int pb_data){
+            node * new_node = new node();
+            new_node->setData(new_data);
+
+            node * temp = current;
+            while(temp->getData() != pb_data){
+                // the case where pb_data does not exist
+                if(temp->getNext() == current){
+                    cout << pb_data << " is not in the list to push after it!" << endl;
+                    return;
+                }
+
+                temp = temp->getNext();
+            }
+
+            // for the first node to correctly set the * current
+            if(temp == current){
+                this->push(new_data);
+                return;
+            }
+
+            node * prevNode = temp->getPrev();
+            temp->setPrev(new_node);
+            new_node->setNext(temp);
+            new_node->setPrev(prevNode);
+            prevNode->setNext(new_node);
+            size++;
+        }
 
         void print(){
             if(current == nullptr){
