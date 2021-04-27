@@ -233,11 +233,16 @@ int main(){
     list.pop(12);
     list.push(32);
     list.print();
-
     list.push_after(85, 22);
+    list.print();
+    list.push_before(1400, 32);
     list.print();
 
     list.pop();
+    list.push_after(666, 85);
+    list.print();
+
+    list.push_before(99, 666);
     list.print();
 
     cout << "Size of list : " << list.getSize() << endl;
